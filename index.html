@@ -1,15 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>RPS GAME</title>
 </head>
-<body style="background-color: #2f2f2f;">
+
+<body>
+
+    <div class="container">
+        <h1 class="logo"> ROCK PAPER SCISSORS!</h1>
+        <div class="scoreboard">
+            <div class="player-score">
+                <p>Player</p>
+                <span id="player-score">0</span>
+            </div>
+            <div class="computer-score">
+                <p>Computer</p>
+                <span id="computer-score">0</span>
+            </div>
+        </div>
+
+        <div class="choices">
+            <button id="rock" class="choice-button">Rock</button>
+            <button id="paper" class="choice-button">Paper</button>
+            <button id="scissors" class="choice-button">Scissors</button>
+        </div>
+
+        <p id="round-result">Are You Ready?</p>
+        <button id="restart">Restart Game</button>
+    </div>
+
+    <script src="app.js"></script>
+    </div>
 
 
-    
-    
 </body>
+
 </html>

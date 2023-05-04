@@ -1,56 +1,51 @@
 const choices = ["rock", "paper", "scissors"];
+let playerScore = 0;
+let computerScore = 0;
 
-
-function getComputerChoice() {
-    const computerSelection = choices[Math.floor(Math.random() * choices.length)];
-    return computerSelection
-
+// Update the score display on the page
+function updateScore() {
+  document.getElementById("player-score").textContent = playerScore;
+  document.getElementById("computer-score").textContent = computerScore;
 }
 
+// Play a single round of the game
+function playRound(playerSelection) {
+  const computerSelection = choices[Math.floor(Math.random() * choices.length)];
 
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
-
-    if (playerSelection === computerSelection) {
-        return "It's a tie!";
-
-    } else if (
-        (playerSelection === "rock" && computerSelection === "scissors") ||
-        (playerSelection === "paper" && computerSelection === "rock") ||
-        (playerSelection === "scissors" && computerSelection === "paper")
+  if (playerSelection === computerSelection) {
+    return "It's a tie!";
+  } else if (
+    (playerSelection ==="rock" && computerSelection === "scissors") ||
+    (playerSelection ==="paper" && computerSelection === "rock") ||
+    (playerSelection ==="scissors" && computerSelection === "paper")
     ) {
-        return `You win! ${playerSelection} beats ${computerSelection}.`;
-
+      playerScore++;
+      updateScore();
+      return `You win! ${playerSelection} beats ${computerSelection}`;
     } else {
-        return `You lose! ${computerSelection} beats ${playerSelection}.`;
+      computerScore++;
+      updateScore();
+      return `You lose! ${computerSelection} beats ${playerSelection}`;
     }
-}
-
-function game(Rounds) {
-    let compscore = 0;
-    let playerscore = 0;
-
-    for (let i = 0; i < Rounds; i++) {
-        const playerSelection = prompt("Choose Rock, Paper or Scissors");
-        const computerSelection = getComputerChoice();
-        const result = playRound(playerSelection, computerSelection);
-        console.log(result);
-
-        if (result.includes("Win")) {
-            playerscore++;
-        } else if (result.includes("Lose")) {
-            compscore++;
-        }
-
-        if (playerscore > compscore) {
-            console.log("You win the game! Final score: ", playerscore - compscore);
-        } else if (playerscore < compscore) {
-            console.log("You lose the game! Final score: ", compscore - playerscore);
-        } else {
-            console.log("It's a tie game! Final score: ", playerscore - compscore);
-        }
-
-    }
-}
-
-game(5);
+  }
+  
+  // Restart the game by resetting the scores and clearing the round result message
+  function restartGame() {
+    playerScore = 0;
+    computerScore = 0;
+    updateScore();
+    document.getElementById("round-result").textContent = "Lets Play Again!";
+  }
+  
+  // Add event listeners to the choice buttons and restart button
+  document.querySelectorAll(".choice-button").forEach((button) => {
+    button.addEventListener("click", () => {
+      const roundResult = playRound(button.id);
+      document.getElementById("round-result").textContent = roundResult;
+    });
+  });
+  
+  document.getElementById("restart").addEventListener("click", () => {
+    restartGame();
+  });
+  
